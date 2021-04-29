@@ -1,5 +1,5 @@
 # generator
-
+templates 来源 https://github.com/xiyeming/mybatis-plus-generator
 #### 介绍
 MyBatis-Plus代码生成器
 

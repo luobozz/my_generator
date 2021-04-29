@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 设置返回HashMap，字段值为null时保存key，如果不设置默认是false -->
+        <setting name="callSettersOnNulls" value="true" />
+        <!-- 开启二级缓存，默认是false -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 数据库超时时间 -->
+        <setting name="defaultStatementTimeout" value="10000" />
+        <!-- 数据库日志体现-->
+<!--        <setting name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl" />-->
+    </settings>
+</configuration>
