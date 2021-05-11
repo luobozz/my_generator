@@ -1,0 +1,10 @@
+package com.shtf.edu.bean.api.{module}.query;
+
+import lombok.Data;
+import com.shtf.edu.bean.BaseQuery;
+/**
+ * @author chenlingyu
+ */
+@Data
+public class {name}Query extends BaseQuery {
+}
