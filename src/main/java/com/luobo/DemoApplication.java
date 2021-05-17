@@ -1,7 +1,7 @@
 package com.luobo;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.luobo.gen.GeneratorHelper;
+import com.luobo.genHelper.GeneratorHelper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
