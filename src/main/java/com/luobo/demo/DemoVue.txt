@@ -1,0 +1,118 @@
+<template>
+  <div class="content">
+    <layout-card title="&${chinese}列表" title-icon="fa-th-list" :titleBtn="cardBtn">
+      <a-table
+          bordered
+          :columns="columns"
+          :dataSource="crudList.dataList"
+          :loading="crudList.loading"
+          :rowKey="record =>record.uuid"
+          :pagination="crudList.pagination"
+          :scroll="{ x: crudList.scrollWidth }">
+        <span slot="action" slot-scope="record" class="btn-group">
+          <a-button
+              type="primary"
+              size="small"
+              @click="crudSingleHandle().edit(modal.role,record)">编辑</a-button>
+           <a-button
+               type="danger"
+               size="small">
+            <lb-icon type="fa-trash-o"></lb-icon>
+          </a-button>
+           </span>
+      </a-table>
+    </layout-card>
+  </div>
+</template>
+
+<script>
+import methods from "./&${min}.js";
+const default&${max} = {
+}
+export default {
+  name: "&${min}",
+  data() {
+    return {
+      modal: {
+        &${min}: {
+          name: "&${chinese}",
+          title: "",
+          switch: false,
+          form: {
+            ref: "&${min}ModalForm",
+          }
+        }
+      },
+      cardBtn: [
+
+        {
+          title: "新增角色",
+          action: () => {
+            this.crudSingleHandle().add(this.modal.permission, default&${max});
+          },
+          icon: "fa-plus"
+        },
+        {
+          action: () => {
+            this.crudConditionsHandle().reset();
+          },
+          icon: "fa-eraser"
+        },
+        {
+          action: () => {
+            this.crudBatchHandle().list();
+          },
+          icon: "fa-refresh"
+        }
+      ],
+      columns: [
+        {
+          title: "编号",
+          dataIndex: 'id',
+        },
+        {
+          title: '创建时间',
+          dataIndex: 'createdTime',
+          customRender: (text) => {
+            return this.$util.data.dataFormat(text);
+          }
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: "120px",
+          scopedSlots: {customRender: 'action'},
+          fixed: 'right'
+        }
+      ]
+    }
+  },
+  created() {
+    this.init()
+  },
+  computed: {},
+  methods: methods
+}
+</script>
+
+<style lang="less" scoped>
+@import "./&${min}.less";
+</style>
+
+
+
+----------------------------------------------------------------------------------------------------
+
+const methods = {
+    init() {
+        this.initCurd({
+            list: this.$httpApi.ews.system.&${min}.get&${max},
+            add:  this.$httpApi.ews.system.&${min}.add&${max},
+            edit:  this.$httpApi.ews.system.&${min}.edit&${max}
+        })
+    }
+}
+
+export default methods
+
+--------------------------------------------------------------------------------------------

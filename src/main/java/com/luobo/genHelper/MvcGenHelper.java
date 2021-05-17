@@ -5,30 +5,30 @@ package com.luobo.genHelper;
  */
 public class MvcGenHelper {
 
-    private static String ctlStr="    @RequiresPermissions(value = {\"laboratory:list\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+    private static String ctlStr="    @RequiresPermissions(value = {\"laboratory:list\", \"laboratory:all\", \"main:all\"}, logical = Logical.OR)\n" +
             "    @GetMapping(\"\")\n" +
-            "    public ResponseMessage getLaboratory(GetLaboratoryQuery query) {\n" +
+            "    public ResponseMessage getLaboratory(@Valid GetLaboratoryQuery query) {\n" +
             "        IPage laboratoryIPage = serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).getList(query);\n" +
             "        return responseMessageHandle.code(200).dataList(laboratoryIPage.getRecords()).total(laboratoryIPage.getTotal());\n" +
             "    }\n" +
             "\n" +
-            "    @RequiresPermissions(value = {\"laboratory:add\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @RequiresPermissions(value = {\"laboratory:add\", \"laboratory:all\", \"main:all\"}, logical = Logical.OR)\n" +
             "    @PostMapping(\"\")\n" +
-            "    public ResponseMessage addLaboratory(AddLaboratoryQuery query) {\n" +
+            "    public ResponseMessage addLaboratory(@Valid AddLaboratoryQuery query) {\n" +
             "        Laboratory laboratory = (Laboratory) serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).addOne(query, Laboratory.class);\n" +
             "        return responseMessageHandle.code(laboratory != null ? 200 : 1004);\n" +
             "    }\n" +
             "\n" +
-            "    @RequiresPermissions(value = {\"laboratory:edit\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @RequiresPermissions(value = {\"laboratory:edit\", \"laboratory:all\", \"main:all\"}, logical = Logical.OR)\n" +
             "    @PutMapping(\"\")\n" +
-            "    public ResponseMessage editLaboratory(EditLaboratoryQuery query) {\n" +
+            "    public ResponseMessage editLaboratory(@Valid EditLaboratoryQuery query) {\n" +
             "        boolean bl = serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).editOne(query, new QueryWrapper<Laboratory>().eq(\"uuid\", query.getUuid()), Laboratory.class);\n" +
             "        return responseMessageHandle.code(bl ? 200 : 1005);\n" +
             "    }\n" +
             "\n" +
-            "    @RequiresPermissions(value = {\"laboratory:delete\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @RequiresPermissions(value = {\"laboratory:delete\", \"laboratory:all\", \"main:all\"}, logical = Logical.OR)\n" +
             "    @DeleteMapping(\"\")\n" +
-            "    public ResponseMessage deleteLaboratory(DeleteLaboratoryQuery query) {\n" +
+            "    public ResponseMessage deleteLaboratory(@Valid DeleteLaboratoryQuery query) {\n" +
             "        boolean bl = serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).deleteOne(query, new QueryWrapper<Laboratory>().eq(\"uuid\", query.getUuid()));\n" +
             "        return responseMessageHandle.code(bl ? 200 : 1006);\n" +
             "    }";
