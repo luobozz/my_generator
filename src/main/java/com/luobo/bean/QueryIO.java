@@ -7,6 +7,7 @@ import lombok.Data;
  */
 @Data
 public class QueryIO {
+    private String module;
     private String name;
     private String content;
 }

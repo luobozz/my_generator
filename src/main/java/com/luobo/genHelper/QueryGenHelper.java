@@ -1,6 +1,7 @@
 package com.luobo.genHelper;
 
 import com.luobo.bean.QueryIO;
+import org.springframework.util.StringUtils;
 
 import java.io.*;
 
@@ -19,18 +20,23 @@ public class QueryGenHelper {
 
         buff.close();
 
-        String module = "system.account";
 
-        str = str.replaceAll("\\{module\\}", module);
-
-        String[] names = new String[]{"Laboratory", "Student", "Teacher","Class"};
+        String[] names = new String[]{"Laboratory", "Student", "Teacher", "ClassCollective"};
+        String[] modules = new String[]{"laboratory", "student", "teacher", "classCollective"};
         String[] ways = new String[]{"Get", "Edit", "Add", "Delete"};
 
-        for (String name : names) {
+        for (int i = 0; i < names.length; i++) {
+            String name = names[i], module = modules[i];
             for (String way : ways) {
+                String paramStr = "";
+                if (way.equals("Delete") || way.equals("Edit")) {
+                    paramStr = "    @NotEmpty\n" +
+                            "    private String uuid;";
+                }
                 QueryIO queryIO = new QueryIO();
+                queryIO.setModule(module);
                 queryIO.setName(way + name + "Query.java");
-                queryIO.setContent(str.replaceAll("\\{name\\}", way + name));
+                queryIO.setContent(str.replaceAll("\\{name\\}", way + name).replaceAll("\\{params\\}", paramStr).replaceAll("\\{module\\}", module));
                 write(queryIO);
             }
         }
@@ -38,7 +44,11 @@ public class QueryGenHelper {
     }
 
     private static void write(QueryIO queryIO) throws IOException {
-        File file = new File("F:\\gen\\com\\shtf\\edu\\query\\" + queryIO.getName());
+        File dirFile=new File("F:\\gen\\com\\shtf\\edu\\query\\" + queryIO.getModule() + "\\query");
+        if(!dirFile.exists()){
+            dirFile.mkdirs();
+        }
+        File file = new File( dirFile.getPath()+"\\"+ queryIO.getName());
         Writer out = null;
         out = new FileWriter(file);
         out.write(queryIO.getContent());

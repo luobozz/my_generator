@@ -39,8 +39,8 @@ public class MvcGenHelper {
 
         String namespace1="laboratory";
         String namespace2="Laboratory";
-        String[] names = new String[]{"laboratory", "student", "teacher","class"};
-        String[] names2 = new String[]{"Laboratory", "Student", "Teacher","Class"};
+        String[] names = new String[]{"laboratory", "student", "teacher","classCollective"};
+        String[] names2 = new String[]{"Laboratory", "Student", "Teacher","ClassCollective"};
 
         for(int i=0;i<names.length;i++){
             String str=gen(namespace1,namespace2,names[i],names2[i]);
