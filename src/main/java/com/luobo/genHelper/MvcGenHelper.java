@@ -5,42 +5,42 @@ package com.luobo.genHelper;
  */
 public class MvcGenHelper {
 
-    private static String ctlStr="@RequiresPermissions(value={\"role:list\",\"role:all\",\"all\"},logical = Logical.OR)\n" +
-            "    @GetMapping(\"role\")\n" +
-            "    public ResponseMessage getRole(GetRoleQuery query) {\n" +
-            "        IPage roleIPage=serviceHelper.getService(SysRoleMapper.class).getList(query);\n" +
-            "        return responseMessageHandle.code(200).dataList(roleIPage.getRecords()).total(roleIPage.getTotal());\n" +
+    private static String ctlStr="    @RequiresPermissions(value = {\"laboratory:list\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @GetMapping(\"\")\n" +
+            "    public ResponseMessage getLaboratory(GetLaboratoryQuery query) {\n" +
+            "        IPage laboratoryIPage = serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).getList(query);\n" +
+            "        return responseMessageHandle.code(200).dataList(laboratoryIPage.getRecords()).total(laboratoryIPage.getTotal());\n" +
             "    }\n" +
             "\n" +
-            "    @RequiresPermissions(value={\"role:add\",\"role:all\",\"all\"},logical = Logical.OR)\n" +
-            "    @PostMapping(\"role\")\n" +
-            "    public ResponseMessage addRole(AddRoleQuery query) {\n" +
-            "        SysRole role= (SysRole) serviceHelper.getService(SysRoleMapper.class).addOne(query);\n" +
-            "        return responseMessageHandle.code(role!=null?200:1004);\n" +
+            "    @RequiresPermissions(value = {\"laboratory:add\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @PostMapping(\"\")\n" +
+            "    public ResponseMessage addLaboratory(AddLaboratoryQuery query) {\n" +
+            "        Laboratory laboratory = (Laboratory) serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).addOne(query, Laboratory.class);\n" +
+            "        return responseMessageHandle.code(laboratory != null ? 200 : 1004);\n" +
             "    }\n" +
             "\n" +
-            "    @RequiresPermissions(value={\"role:edit\",\"role:all\",\"all\"},logical = Logical.OR)\n" +
-            "    @PutMapping(\"role\")\n" +
-            "    public ResponseMessage editRole(EditRoleQuery query) {\n" +
-            "        int code =serviceHelper.getService(SysRoleMapper.class).editOne(query,new QueryWrapper<SysPermission>().eq(\"uuid\", query.getUuid()));\n" +
-            "        return responseMessageHandle.code(code);\n" +
+            "    @RequiresPermissions(value = {\"laboratory:edit\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @PutMapping(\"\")\n" +
+            "    public ResponseMessage editLaboratory(EditLaboratoryQuery query) {\n" +
+            "        boolean bl = serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).editOne(query, new QueryWrapper<Laboratory>().eq(\"uuid\", query.getUuid()), Laboratory.class);\n" +
+            "        return responseMessageHandle.code(bl ? 200 : 1005);\n" +
             "    }\n" +
             "\n" +
-            "    @RequiresPermissions(value={\"role:delete\",\"role:all\",\"all\"},logical = Logical.OR)\n" +
-            "    @DeleteMapping(\"role\")\n" +
-            "    public ResponseMessage deleteRole(DeleteRoleQuery query) {\n" +
-            "        int code =serviceHelper.getService(SysRoleMapper.class).deleteOne(query,new QueryWrapper<SysPermission>().eq(\"uuid\", query.getUuid()));\n" +
-            "        return responseMessageHandle.code(code);\n" +
+            "    @RequiresPermissions(value = {\"laboratory:delete\", \"laboratory:all\", \"all\"}, logical = Logical.OR)\n" +
+            "    @DeleteMapping(\"\")\n" +
+            "    public ResponseMessage deleteLaboratory(DeleteLaboratoryQuery query) {\n" +
+            "        boolean bl = serviceHelper.getService(LaboratoryMapper.class, Laboratory.class).deleteOne(query, new QueryWrapper<Laboratory>().eq(\"uuid\", query.getUuid()));\n" +
+            "        return responseMessageHandle.code(bl ? 200 : 1006);\n" +
             "    }";
     private static String serStr="";
     private static String seriStr="";
 
     public static void main(String[] args){
 
-        String namespace1="role";
-        String namespace2="Role";
-        String[] names = new String[]{"route", "permission"};
-        String[] names2 = new String[]{"Route", "Permission"};
+        String namespace1="laboratory";
+        String namespace2="Laboratory";
+        String[] names = new String[]{"laboratory", "student", "teacher","class"};
+        String[] names2 = new String[]{"Laboratory", "Student", "Teacher","Class"};
 
         for(int i=0;i<names.length;i++){
             String str=gen(namespace1,namespace2,names[i],names2[i]);

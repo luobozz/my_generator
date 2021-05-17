@@ -23,7 +23,7 @@ public class QueryGenHelper {
 
         str = str.replaceAll("\\{module\\}", module);
 
-        String[] names = new String[]{"Role", "Route", "Permission"};
+        String[] names = new String[]{"Laboratory", "Student", "Teacher","Class"};
         String[] ways = new String[]{"Get", "Edit", "Add", "Delete"};
 
         for (String name : names) {
